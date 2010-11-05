@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Rir [RDoc Documentation]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }<\/style>" )
+
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Rir</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+
+
+                <a href="../files/lib/rir/string_rb.html">
+
+                lib/rir/string.rb
+
+                </a>
+
+
+        <br />
+
+
+                <a href="../files/lib/rir/document_rb.html">
+
+                lib/rir/document.rb
+
+                </a>
+
+
+        <br />
+
+            </td>
+        </tr>
+
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+General module for many purposes related to Information Retrieval.
+</p>
+<hr size="1"></hr><p>
+General module for many purposes related to Information Retrieval.
+</p>
+
+    </div>
+
+   </div>
+
+
+  </div>
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Rir/Document.html" class="link">Rir::Document</a><br />
+Class <a href="Rir/WebDocument.html" class="link">Rir::WebDocument</a><br />
+Class <a href="Rir/WikipediaPage.html" class="link">Rir::WikipediaPage</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">Stoplist</td>
+          <td>=</td>
+          <td class="context-item-value">[   &quot;a&quot;, &quot;anything&quot;, &quot;anyway&quot;, &quot;anywhere&quot;, &quot;apart&quot;, &quot;are&quot;, &quot;around&quot;, &quot;as&quot;, &quot;at&quot;, &quot;av&quot;,   &quot;be&quot;, &quot;became&quot;, &quot;because&quot;, &quot;become&quot;, &quot;becomes&quot;, &quot;becoming&quot;, &quot;been&quot;, &quot;before&quot;, &quot;beforehand&quot;,   &quot;behind&quot;, &quot;being&quot;, &quot;below&quot;, &quot;beside&quot;, &quot;besides&quot;, &quot;between&quot;, &quot;beyond&quot;, &quot;both&quot;, &quot;but&quot;, &quot;by&quot;,   &quot;can&quot;, &quot;cannot&quot;, &quot;canst&quot;, &quot;certain&quot;, &quot;cf&quot;, &quot;choose&quot;, &quot;contrariwise&quot;, &quot;cos&quot;, &quot;could&quot;, &quot;cu&quot;,   &quot;day&quot;, &quot;do&quot;, &quot;does&quot;, &quot;doesn't&quot;, &quot;doing&quot;, &quot;dost&quot;, &quot;doth&quot;, &quot;double&quot;, &quot;down&quot;, &quot;dual&quot;, &quot;during&quot;,   &quot;each&quot;, &quot;either&quot;, &quot;else&quot;, &quot;elsewhere&quot;, &quot;enough&quot;, &quot;et&quot;, &quot;etc&quot;, &quot;even&quot;, &quot;ever&quot;, &quot;every&quot;,   &quot;everybody&quot;, &quot;everyone&quot;, &quot;everything&quot;, &quot;everywhere&quot;, &quot;except&quot;, &quot;excepted&quot;, &quot;excepting&quot;,   &quot;exception&quot;, &quot;exclude&quot;, &quot;excluding&quot;, &quot;exclusive&quot;, &quot;far&quot;, &quot;farther&quot;, &quot;farthest&quot;, &quot;few&quot;, &quot;ff&quot;,   &quot;first&quot;, &quot;for&quot;, &quot;formerly&quot;, &quot;forth&quot;, &quot;forward&quot;, &quot;from&quot;, &quot;front&quot;, &quot;further&quot;, &quot;furthermore&quot;,   &quot;furthest&quot;, &quot;get&quot;, &quot;go&quot;, &quot;had&quot;, &quot;halves&quot;, &quot;hardly&quot;, &quot;has&quot;, &quot;hast&quot;, &quot;hath&quot;, &quot;have&quot;, &quot;he&quot;,   &quot;hence&quot;, &quot;henceforth&quot;, &quot;her&quot;, &quot;here&quot;, &quot;hereabouts&quot;, &quot;hereafter&quot;, &quot;hereby&quot;, &quot;herein&quot;, &quot;hereto&quot;,   &quot;hereupon&quot;, &quot;hers&quot;, &quot;herself&quot;, &quot;him&quot;, &quot;himself&quot;, &quot;hindmost&quot;, &quot;his&quot;, &quot;hither&quot;, &quot;hitherto&quot;,   &quot;how&quot;, &quot;however&quot;, &quot;howsoever&quot;, &quot;i&quot;, &quot;ie&quot;, &quot;if&quot;, &quot;in&quot;, &quot;inasmuch&quot;, &quot;inc&quot;, &quot;include&quot;,   &quot;included&quot;, &quot;including&quot;, &quot;indeed&quot;, &quot;indoors&quot;, &quot;inside&quot;, &quot;insomuch&quot;, &quot;instead&quot;, &quot;into&quot;,   &quot;inward&quot;, &quot;inwards&quot;, &quot;is&quot;, &quot;it&quot;, &quot;its&quot;, &quot;itself&quot;, &quot;just&quot;, &quot;kind&quot;, &quot;kg&quot;, &quot;km&quot;, &quot;last&quot;,   &quot;latter&quot;, &quot;latterly&quot;, &quot;less&quot;, &quot;lest&quot;, &quot;let&quot;, &quot;like&quot;, &quot;little&quot;, &quot;ltd&quot;, &quot;many&quot;, &quot;may&quot;, &quot;maybe&quot;,   &quot;me&quot;, &quot;meantime&quot;, &quot;meanwhile&quot;, &quot;might&quot;, &quot;moreover&quot;, &quot;most&quot;, &quot;mostly&quot;, &quot;more&quot;, &quot;mr&quot;, &quot;mrs&quot;,   &quot;ms&quot;, &quot;much&quot;, &quot;must&quot;, &quot;my&quot;, &quot;myself&quot;, &quot;namely&quot;, &quot;need&quot;, &quot;neither&quot;, &quot;never&quot;, &quot;nevertheless&quot;,   &quot;next&quot;, &quot;no&quot;, &quot;nobody&quot;, &quot;none&quot;, &quot;nonetheless&quot;, &quot;noone&quot;, &quot;nope&quot;, &quot;nor&quot;, &quot;not&quot;, &quot;nothing&quot;,   &quot;notwithstanding&quot;, &quot;now&quot;, &quot;nowadays&quot;, &quot;nowhere&quot;, &quot;of&quot;, &quot;off&quot;, &quot;often&quot;, &quot;ok&quot;, &quot;on&quot;, &quot;once&quot;,   &quot;one&quot;, &quot;only&quot;, &quot;onto&quot;, &quot;or&quot;, &quot;other&quot;, &quot;others&quot;, &quot;otherwise&quot;, &quot;ought&quot;, &quot;our&quot;, &quot;ours&quot;,   &quot;ourselves&quot;, &quot;out&quot;, &quot;outside&quot;, &quot;over&quot;, &quot;own&quot;, &quot;per&quot;, &quot;perhaps&quot;, &quot;plenty&quot;, &quot;provide&quot;, &quot;quite&quot;,   &quot;rather&quot;, &quot;really&quot;, &quot;round&quot;, &quot;said&quot;, &quot;sake&quot;, &quot;same&quot;, &quot;sang&quot;, &quot;save&quot;, &quot;saw&quot;, &quot;see&quot;, &quot;seeing&quot;,   &quot;seem&quot;, &quot;seemed&quot;, &quot;seeming&quot;, &quot;seems&quot;, &quot;seen&quot;, &quot;seldom&quot;, &quot;selves&quot;, &quot;sent&quot;, &quot;several&quot;, &quot;shalt&quot;,   &quot;she&quot;, &quot;should&quot;, &quot;shown&quot;, &quot;sideways&quot;, &quot;since&quot;, &quot;slept&quot;, &quot;slew&quot;, &quot;slung&quot;, &quot;slunk&quot;, &quot;smote&quot;,   &quot;so&quot;, &quot;some&quot;, &quot;somebody&quot;, &quot;somehow&quot;, &quot;someone&quot;, &quot;something&quot;, &quot;sometime&quot;, &quot;sometimes&quot;,   &quot;somewhat&quot;, &quot;somewhere&quot;, &quot;spake&quot;, &quot;spat&quot;, &quot;spoke&quot;, &quot;spoken&quot;, &quot;sprang&quot;, &quot;sprung&quot;, &quot;stave&quot;,   &quot;staves&quot;, &quot;still&quot;, &quot;such&quot;, &quot;supposing&quot;, &quot;than&quot;, &quot;that&quot;, &quot;the&quot;, &quot;thee&quot;, &quot;their&quot;, &quot;them&quot;,   &quot;themselves&quot;, &quot;then&quot;, &quot;thence&quot;, &quot;thenceforth&quot;, &quot;there&quot;, &quot;thereabout&quot;, &quot;thereabouts&quot;,   &quot;thereafter&quot;, &quot;thereby&quot;, &quot;therefore&quot;, &quot;therein&quot;, &quot;thereof&quot;, &quot;thereon&quot;, &quot;thereto&quot;, &quot;thereupon&quot;,   &quot;these&quot;, &quot;they&quot;, &quot;this&quot;, &quot;those&quot;, &quot;thou&quot;, &quot;though&quot;, &quot;thrice&quot;, &quot;through&quot;, &quot;throughout&quot;, &quot;thru&quot;,   &quot;thus&quot;, &quot;thy&quot;, &quot;thyself&quot;, &quot;till&quot;, &quot;to&quot;, &quot;together&quot;, &quot;too&quot;, &quot;toward&quot;, &quot;towards&quot;, &quot;ugh&quot;,   &quot;unable&quot;, &quot;under&quot;, &quot;underneath&quot;, &quot;unless&quot;, &quot;unlike&quot;, &quot;until&quot;, &quot;up&quot;, &quot;upon&quot;, &quot;upward&quot;,   &quot;upwards&quot;, &quot;us&quot;, &quot;use&quot;, &quot;used&quot;, &quot;using&quot;, &quot;very&quot;, &quot;via&quot;, &quot;vs&quot;, &quot;want&quot;, &quot;was&quot;, &quot;we&quot;, &quot;week&quot;,   &quot;well&quot;, &quot;were&quot;, &quot;what&quot;, &quot;whatever&quot;, &quot;whatsoever&quot;, &quot;when&quot;, &quot;whence&quot;, &quot;whenever&quot;, &quot;whensoever&quot;,   &quot;where&quot;, &quot;whereabouts&quot;, &quot;whereafter&quot;, &quot;whereas&quot;, &quot;whereat&quot;, &quot;whereby&quot;, &quot;wherefore&quot;,   &quot;wherefrom&quot;, &quot;wherein&quot;, &quot;whereinto&quot;, &quot;whereof&quot;, &quot;whereon&quot;, &quot;wheresoever&quot;, &quot;whereto&quot;,   &quot;whereunto&quot;, &quot;whereupon&quot;, &quot;wherever&quot;, &quot;wherewith&quot;, &quot;whether&quot;, &quot;whew&quot;, &quot;which&quot;, &quot;whichever&quot;,   &quot;whichsoever&quot;, &quot;while&quot;, &quot;whilst&quot;, &quot;whither&quot;, &quot;who&quot;, &quot;whoa&quot;, &quot;whoever&quot;, &quot;whole&quot;, &quot;whom&quot;,   &quot;whomever&quot;, &quot;whomsoever&quot;, &quot;whose&quot;, &quot;whosoever&quot;, &quot;why&quot;, &quot;will&quot;, &quot;wilt&quot;, &quot;with&quot;, &quot;within&quot;,   &quot;without&quot;, &quot;worse&quot;, &quot;worst&quot;, &quot;would&quot;, &quot;wow&quot;, &quot;ye&quot;, &quot;yet&quot;, &quot;year&quot;, &quot;yippee&quot;, &quot;you&quot;, &quot;your&quot;,   &quot;yours&quot;, &quot;yourself&quot;, &quot;yourselves&quot;    ]</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+These are the default stopwords provided by Lemur.
+
+</td>
+
+        </tr>
+
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <!-- if method_list -->
+
+
+
+
+  </div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

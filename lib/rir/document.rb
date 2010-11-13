@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # General module for many purposes related to Information Retrieval.
-module Rir
+module RIR
 
   # A Document is a bag of words and is constructed from a string.
   class Document

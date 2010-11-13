@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # General module for many purposes related to Information Retrieval.
-module Rir
+module RIR
 
   # These are the default stopwords provided by Lemur.
   Stoplist = [
@@ -71,7 +71,7 @@ end
 
 # Extention of the standard class String with useful function.
 class String
-  include Rir
+  include RIR
 
   # Returns +true+ if +self+ belongs to Rir::Stoplist, +false+ otherwise.
   def is_stopword?
@@ -146,10 +146,11 @@ class String
     self.scan(/<#{tag_name}.*?>(.+?)<\/#{tag_name}>/).flatten
   end
 
-  private
   def strip_with_pattern(pattern)
     require 'cgi'
     require 'kconv'
     CGI::unescapeHTML(self.gsub(pattern,"")).toutf8
   end
+
+  private :strip_with_pattern
 end

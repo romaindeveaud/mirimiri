@@ -2,3 +2,4 @@
 
 require 'rir/document'
 require 'rir/string'
+require 'rir/query'

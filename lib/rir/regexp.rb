@@ -17,25 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# General module for many purposes related to Information Retrieval.
-module RIR
+class Regexp
 
-  class Corpus
-    attr_accessor :path
-
-    def initialize(path)
-      @path = path.chomp "/"
-    end
-
-    # Recursively outputs all files in +self.path+.
-    # WARNING ! This function may take a lot of time if many
-    # files are in subdirectories.
-    #
-    #   c = Corpus.new "my/path"
-    #   c.files                  # => ["README.txt", "lib/code.rb"]
-    def files
-      Dir["#{@path}/**/*.*"]
-    end
+  def negated
+    /^((?!#{self}).)*$/
   end
 
 end

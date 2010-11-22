@@ -117,5 +117,37 @@ module RIR
 
   # A WikipediaPage is a WebDocument.
   class WikipediaPage < WebDocument
+    require 'rexml/document'
+    require 'net/http'
+    require 'kconv'
+
+
+    def self.search_wikipedia_titles(name)
+      res = REXML::Document.new(Net::HTTP.get(URI.parse("http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml")).toutf8).elements['api/query/search']
+
+      res.collect { |e| e.attributes['title'] } unless res.nil?
+    end
+
+    def self.get_url(name)
+      atts = REXML::Document.new(Net::HTTP.get(URI.parse("http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml")).toutf8).elements['api/query/pages/page'].attributes
+
+      atts['fullurl'] if atts['missing'].nil?
+    end
+
+    def self.search_homepage(name)
+      title = WikipediaPage.search_wikipedia_titles name
+
+      begin
+        WikipediaPage.new(WikipediaPage.get_url title[0]) unless title.nil? || title.empty?
+      rescue
+        puts title[0]
+      end
+    end
+
+#    def initialize(name)
+#      title = WikipediaPage.search_wikipedia_titles name
+#      raise ArgumentError, "No page found" if title.empty? 
+#      super WikipediaPage.get_url title[0]
+#    end
   end
 end

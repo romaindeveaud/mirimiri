@@ -21,4 +21,8 @@ class TestString < Test::Unit::TestCase
   def test_strip_xml
     assert_equal("testme", "<test>testme</test>".strip_xml_tags)
   end
+
+  def test_strip_punctuation
+    assert_equal("test test test test   test test", "test, test. .test, ;test !! ? test ...test./".strip_punctuation)
+  end
 end

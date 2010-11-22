@@ -138,6 +138,23 @@ class String
     dup.strip_stylesheets!
   end
 
+  # Removes punctuation from +self+.
+  #
+  #   s = "hello, world. how are you?!"
+  #   s.strip_punctuation!
+  #   s                                 # => "hello world how are you"
+  def strip_punctuation!
+    replace strip_with_pattern /[^a-zA-Z0-9\-\s]/
+  end
+
+  # Removes punctuation from +self+.
+  #
+  #   s = "hello, world. how are you?!"
+  #   s.strip_punctuation               # => "hello world how are you"
+  def strip_punctuation
+    dup.strip_punctuation!
+  end
+
   # Returns the text values inside all occurences of a XML tag in +self+
   #
   #   s = "four-piece in <a href='#'>Indianapolis</a>, <a href='#'>Indiana</a> at the Murat Theatre"

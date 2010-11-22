@@ -61,7 +61,6 @@ module RIR
       attr_accessor :id, :query, :params, :rule
 
       def initialize(id,query,params)
-#        @params = Parameters === params ? params : Parameters.new(corpus)
         @params = params
         # Here we set the default retrieval model as Language Modeling
         # with a Dirichlet smoothing at 2500.

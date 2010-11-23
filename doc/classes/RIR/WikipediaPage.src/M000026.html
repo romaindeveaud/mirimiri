@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>search_wikipedia_titles (RIR::WikipediaPage)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 125</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">search_wikipedia_titles</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">res</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;http://en.wikipedia.org/w/api.php?action=query&amp;list=search&amp;srsearch=#{URI.escape name}&amp;format=xml&quot;</span>)).<span class="ruby-identifier">toutf8</span>).<span class="ruby-identifier">elements</span>[<span class="ruby-value str">'api/query/search'</span>]
+
+      <span class="ruby-identifier">res</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">'title'</span>] } <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

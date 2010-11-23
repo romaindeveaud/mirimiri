@@ -33,7 +33,7 @@ module RIR
 
       @doc_content.split.each do |w|
         w.split(/\W/).each do |sw| 
-          wo.push(sw) if sw =~ /[a-zA-Z]/ 
+          wo.push(sw.downcase) if sw =~ /[a-zA-Z]/ 
         end
       end
       
@@ -63,7 +63,7 @@ module RIR
     #   count_words #=> { "guitar"=>1, "bass"=>3, "album"=>20, ... } 
     def count_words
       counts = Hash.new { |h,k| h[k] = 0 }
-      @words.each { |w| counts[w.downcase] += 1 }
+      @words.each { |w| counts[w] += 1 }
 
       counts
     end

@@ -99,7 +99,7 @@ useful function.
 
       <div class="name-list">
 
-        <a href="#M000009">extract_xmltags_values</a>&nbsp;&nbsp;
+        <a href="#M000011">extract_xmltags_values</a>&nbsp;&nbsp;
 
         <a href="#M000001">is_stopword?</a>&nbsp;&nbsp;
 
@@ -108,6 +108,10 @@ useful function.
         <a href="#M000006">strip_javascripts</a>&nbsp;&nbsp;
 
         <a href="#M000005">strip_javascripts!</a>&nbsp;&nbsp;
+
+        <a href="#M000010">strip_punctuation</a>&nbsp;&nbsp;
+
+        <a href="#M000009">strip_punctuation!</a>&nbsp;&nbsp;
 
         <a href="#M000008">strip_stylesheets</a>&nbsp;&nbsp;
 
@@ -146,13 +150,13 @@ useful function.
       <h3 class="section-bar">Public Instance methods</h3>
 
 
-      <div id="method-M000009" class="method-detail">
-        <a name="M000009"></a>
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
 
         <div class="method-heading">
 
-          <a href="String.src/M000009.html" target="Code" class="method-signature"
-            onclick="popupCode('String.src/M000009.html');return false;">
+          <a href="String.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('String.src/M000011.html');return false;">
 
           <span class="method-name">extract_xmltags_values</span><span class="method-args">(tag_name)</span>
 
@@ -284,6 +288,63 @@ Removes all Javascript sources from <tt>self</tt>.
        test&quot;
   s.strip_javascripts!
   s                                     #=&gt; &quot;test&quot;
+</pre>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+
+          <a href="String.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('String.src/M000010.html');return false;">
+
+          <span class="method-name">strip_punctuation</span><span class="method-args">()</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Removes punctuation from <tt>self</tt>.
+</p>
+<pre>
+  s = &quot;hello, world. how are you?!&quot;
+  s.strip_punctuation               # =&gt; &quot;hello world how are you&quot;
+</pre>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+
+          <a href="String.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('String.src/M000009.html');return false;">
+
+          <span class="method-name">strip_punctuation!</span><span class="method-args">()</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Removes punctuation from <tt>self</tt>.
+</p>
+<pre>
+  s = &quot;hello, world. how are you?!&quot;
+  s.strip_punctuation!
+  s                                 # =&gt; &quot;hello world how are you&quot;
 </pre>
 
         </div>

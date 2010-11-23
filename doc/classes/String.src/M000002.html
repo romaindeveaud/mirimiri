@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 83</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 82</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_special_characters</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\W/</span>,<span class="ruby-value str">' '</span>).<span class="ruby-identifier">split</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\W/</span>,<span class="ruby-value str">' '</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\A.\z/</span>, <span class="ruby-value str">''</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\A.\z/</span>, <span class="ruby-value str">''</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
   <span class="ruby-keyword kw">end</span></pre>

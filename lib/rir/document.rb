@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+#--
 # This file is a part of an Information Retrieval oriented Ruby library
 #
 # Copyright (C) 2010-2011 Romain Deveaud <romain.deveaud@gmail.com>
@@ -16,6 +17,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#++
+
 
 # General module for many purposes related to Information Retrieval.
 module RIR

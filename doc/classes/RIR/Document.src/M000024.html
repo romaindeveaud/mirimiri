@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 64</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 67</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">count_words</span>
       <span class="ruby-identifier">counts</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-value">0</span> }
       <span class="ruby-ivar">@words</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">counts</span>[<span class="ruby-identifier">w</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }

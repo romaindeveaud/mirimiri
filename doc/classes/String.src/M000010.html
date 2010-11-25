@@ -2,14 +2,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>strip_punctuation! (String)</title>
+  <title>strip_stylesheets! (String)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 145</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_punctuation!</span>
-    <span class="ruby-identifier">replace</span> <span class="ruby-identifier">strip_with_pattern</span> <span class="ruby-operator">/</span>[<span class="ruby-operator">^</span><span class="ruby-identifier">a</span><span class="ruby-operator">-</span><span class="ruby-identifier">zA</span><span class="ruby-operator">-</span><span class="ruby-constant">Z0</span><span class="ruby-operator">-</span><span class="ruby-value">9</span>\<span class="ruby-operator">-</span>\<span class="ruby-identifier">s</span>]<span class="ruby-operator">/</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 133</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_stylesheets!</span>
+  <span class="ruby-comment cmt"># TODO: rewamp. dunno what is it.</span>
+    <span class="ruby-identifier">replace</span> <span class="ruby-identifier">strip_with_pattern</span> <span class="ruby-operator">/</span><span class="ruby-operator">&lt;</span><span class="ruby-identifier">style</span> <span class="ruby-identifier">type</span>=<span class="ruby-value str">&quot;text\/css&quot;</span><span class="ruby-operator">&gt;</span>(.<span class="ruby-operator">+</span><span class="ruby-value">?)</span><span class="ruby-operator">&lt;</span>\<span class="ruby-regexp re">/style&gt;/</span><span class="ruby-identifier">m</span> 
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+#--
 # This file is a part of an Information Retrieval oriented Ruby library
 #
 # Copyright (C) 2010-2011 Romain Deveaud <romain.deveaud@gmail.com>
@@ -16,25 +17,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#++
 
-module RIR
+class Corpus
+  attr_accessor :path
 
-  class Corpus
-    attr_accessor :path
-
-    def initialize(path)
-      @path = path.chomp "/"
-    end
-
-    # Recursively outputs all files in +self.path+.
-    # WARNING ! This function may take a lot of time if many
-    # files are in subdirectories.
-    #
-    #   c = Corpus.new "my/path"
-    #   c.files                  # => ["README.txt", "lib/code.rb"]
-    def files
-      Dir["#{@path}/**/*.*"]
-    end
+  def initialize(path)
+    @path = path.chomp "/"
   end
 
+  # Recursively outputs all files in +self.path+.
+  # WARNING ! This function may take a lot of time if many
+  # files are in subdirectories.
+  #
+  #   c = Corpus.new "my/path"
+  #   c.files                  # => ["README.txt", "lib/code.rb"]
+  def files
+    Dir["#{@path}/**/*.*"]
+  end
 end

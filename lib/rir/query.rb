@@ -25,10 +25,10 @@ module RIR
   module Indri
 
     class Parameters
-      attr_accessor :corpus, :memory, :count, :offset, :run_id, :print_query, :print_docs, :rule, :baseline
+      attr_accessor :index_path, :memory, :count, :offset, :run_id, :print_query, :print_docs, :rule, :baseline
 
       def initialize(corpus,mem="1g",count="1000",offset="1",run_id="default",print_query=false,print_docs=false)
-        @corpus      = corpus
+        @index_path  = corpus
         @memory      = mem
         @count       = count
         @offset      = offset
@@ -40,7 +40,7 @@ module RIR
       def to_s
         h = "<parameters>\n"
         h += "<memory>#{@memory}</memory>\n"
-        h += "<index>#{@corpus}</index>\n"
+        h += "<index>#{@index_path}</index>\n"
         h += "<count>#{@count}</count>\n"
         unless @baseline.nil?
           h += "<baseline>#{@baseline}</baseline>\n" 

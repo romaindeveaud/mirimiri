@@ -73,7 +73,8 @@ module RIR
     # If the string parameter is composed of many words (i.e. tokens separated
     # by whitespace(s)), it is considered as an ngram.    
     #
-    #   entropy("guitar") #=> 0.00389919463243839
+    #   entropy("guitar") #=> 0.00432114812727959
+    #   entropy("dillinger escape plan") #=> 0.265862076325102
     def entropy(s)
       en = 0.0
       counts = self.count_words
@@ -87,6 +88,12 @@ module RIR
       en
     end
 
+    # Computes the term frequency of a given *word* +s+.
+    #
+    #   tf("guitar") #=> 0.000380372765310004
+    def tf(s)
+      self.count_words[s].to_f/@words.size.to_f
+    end
 
 
     def initialize(content)
@@ -123,13 +130,17 @@ module RIR
 
 
     def self.search_wikipedia_titles(name)
-      res = REXML::Document.new(Net::HTTP.get(URI.parse("http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml")).toutf8).elements['api/query/search']
+      raise ArgumentError, "Bad encoding", name unless name.isutf8
+
+      res = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml" ).toutf8).elements['api/query/search']
 
       res.collect { |e| e.attributes['title'] } unless res.nil?
     end
 
     def self.get_url(name)
-      atts = REXML::Document.new(Net::HTTP.get(URI.parse("http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml")).toutf8).elements['api/query/pages/page'].attributes
+      raise ArgumentError, "Bad encoding", name unless name.isutf8
+
+      atts = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml" ).toutf8).elements['api/query/pages/page'].attributes
 
       atts['fullurl'] if atts['missing'].nil?
     end
@@ -137,11 +148,7 @@ module RIR
     def self.search_homepage(name)
       title = WikipediaPage.search_wikipedia_titles name
 
-      begin
-        WikipediaPage.new(WikipediaPage.get_url title[0]) unless title.nil? || title.empty?
-      rescue
-        puts title[0]
-      end
+      WikipediaPage.new(WikipediaPage.get_url title[0]) unless title.nil? || title.empty?
     end
 
 #    def initialize(name)

@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: RIR::Indri::IndriQuery [RDoc Documentation]</title>
+  <title>Class: RIR::TreeTagger::TaggerChunker [RDoc Documentation]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
@@ -46,16 +46,16 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">RIR::Indri::IndriQuery</td>
+          <td class="class-name-in-header">RIR::TreeTagger::TaggerChunker</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
 
 
-                <a href="../../../files/lib/rir/query_rb.html">
+                <a href="../../../files/lib/rir/ttagger_rb.html">
 
-                lib/rir/query.rb
+                lib/rir/ttagger.rb
 
                 </a>
 
@@ -70,11 +70,7 @@
             <td><strong>Parent:</strong></td>
             <td>
 
-                <a href="../Query.html">
-
-                RIR::Query
-
-               </a>
+                Object
 
             </td>
         </tr>
@@ -87,6 +83,13 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+This class handles generic parsing of tagger-chunker outputs.
+</p>
+
+    </div>
+
    </div>
 
 
@@ -95,9 +98,9 @@
 
       <div class="name-list">
 
-        <a href="#M000006">new</a>&nbsp;&nbsp;
+        <a href="#M000002">new</a>&nbsp;&nbsp;
 
-        <a href="#M000007">to_s</a>&nbsp;&nbsp;
+        <a href="#M000001">parse</a>&nbsp;&nbsp;
 
       </div>
     </div>
@@ -117,33 +120,17 @@
         <table>
 
         <tr class="top-aligned-row context-row">
-          <td class="context-item-name">id</td>
+          <td class="context-item-name">chunks</td>
 
-          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
-
-          <td class="context-item-desc"></td>
-        </tr>
-
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">params</td>
-
-          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
 
           <td class="context-item-desc"></td>
         </tr>
 
         <tr class="top-aligned-row context-row">
-          <td class="context-item-name">query</td>
+          <td class="context-item-name">file</td>
 
-          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
-
-          <td class="context-item-desc"></td>
-        </tr>
-
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">rule</td>
-
-          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
 
           <td class="context-item-desc"></td>
         </tr>
@@ -160,44 +147,54 @@
       <h3 class="section-bar">Public Class methods</h3>
 
 
-      <div id="method-M000006" class="method-detail">
-        <a name="M000006"></a>
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
 
         <div class="method-heading">
 
-          <a href="IndriQuery.src/M000006.html" target="Code" class="method-signature"
-            onclick="popupCode('IndriQuery.src/M000006.html');return false;">
+          <a href="TaggerChunker.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('TaggerChunker.src/M000002.html');return false;">
 
-          <span class="method-name">new</span><span class="method-args">(id,query,params)</span>
+          <span class="method-name">new</span><span class="method-args">(chunk_file)</span>
 
           </a>
 
         </div>
 
         <div class="method-description">
+
+          <p>
+Initializes parsing. <tt>chunk_file</tt> is the output of
+<tt>tagger-chunker-</tt> and must be a valid path to the file.
+</p>
+<pre>
+  TaggerChunker.new(&quot;ttout/2010020&quot;) #=&gt; #&lt;RIR::TreeTagger::TaggerChunker:0x92fd088 @chunks=[#&lt;RIR::TreeTagger::Chunk:0x8ec5a10 @words=[&quot;robert&quot;, &quot;schumann&quot;], @tag=&quot;NC&quot;&gt;, ...] ...&gt;
+</pre>
 
         </div>
       </div>
 
 
-      <h3 class="section-bar">Public Instance methods</h3>
-
-
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
 
         <div class="method-heading">
 
-          <a href="IndriQuery.src/M000007.html" target="Code" class="method-signature"
-            onclick="popupCode('IndriQuery.src/M000007.html');return false;">
+          <a href="TaggerChunker.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('TaggerChunker.src/M000001.html');return false;">
 
-          <span class="method-name">to_s</span><span class="method-args">()</span>
+          <span class="method-name">parse</span><span class="method-args">(chunk_lines)</span>
 
           </a>
 
         </div>
 
         <div class="method-description">
+
+          <p>
+Parses a tagger-chunker output and returns an Array of <a
+href="Chunk.html">Chunk</a>.
+</p>
 
         </div>
       </div>

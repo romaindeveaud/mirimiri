@@ -2,15 +2,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>get_content (RIR::WebDocument)</title>
+  <title>new (RIR::WebDocument)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 105</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_content</span>(<span class="ruby-identifier">url</span>)
-      <span class="ruby-identifier">require</span> <span class="ruby-value str">'net/http'</span>
-      <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">url</span>))
+  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 119</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">url</span>)
+      <span class="ruby-ivar">@url</span> = <span class="ruby-identifier">url</span>
+      <span class="ruby-keyword kw">super</span> <span class="ruby-constant">WebDocument</span>.<span class="ruby-identifier">get_content</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">strip_javascripts</span>.<span class="ruby-identifier">strip_stylesheets</span>.<span class="ruby-identifier">strip_xml_tags</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

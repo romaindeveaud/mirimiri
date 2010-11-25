@@ -99,15 +99,17 @@ from a string.
 
       <div class="name-list">
 
-        <a href="#M000021">count_words</a>&nbsp;&nbsp;
+        <a href="#M000010">count_words</a>&nbsp;&nbsp;
 
-        <a href="#M000022">entropy</a>&nbsp;&nbsp;
+        <a href="#M000011">entropy</a>&nbsp;&nbsp;
 
-        <a href="#M000019">format_words</a>&nbsp;&nbsp;
+        <a href="#M000008">format_words</a>&nbsp;&nbsp;
 
-        <a href="#M000023">new</a>&nbsp;&nbsp;
+        <a href="#M000013">new</a>&nbsp;&nbsp;
 
-        <a href="#M000020">ngrams</a>&nbsp;&nbsp;
+        <a href="#M000009">ngrams</a>&nbsp;&nbsp;
+
+        <a href="#M000012">tf</a>&nbsp;&nbsp;
 
       </div>
     </div>
@@ -154,13 +156,13 @@ from a string.
       <h3 class="section-bar">Public Class methods</h3>
 
 
-      <div id="method-M000023" class="method-detail">
-        <a name="M000023"></a>
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
 
         <div class="method-heading">
 
-          <a href="Document.src/M000023.html" target="Code" class="method-signature"
-            onclick="popupCode('Document.src/M000023.html');return false;">
+          <a href="Document.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000013.html');return false;">
 
           <span class="method-name">new</span><span class="method-args">(content)</span>
 
@@ -177,13 +179,13 @@ from a string.
       <h3 class="section-bar">Public Instance methods</h3>
 
 
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
 
         <div class="method-heading">
 
-          <a href="Document.src/M000021.html" target="Code" class="method-signature"
-            onclick="popupCode('Document.src/M000021.html');return false;">
+          <a href="Document.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000010.html');return false;">
 
           <span class="method-name">count_words</span><span class="method-args">()</span>
 
@@ -205,13 +207,13 @@ current <a href="Document.html">Document</a>.
       </div>
 
 
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
 
         <div class="method-heading">
 
-          <a href="Document.src/M000022.html" target="Code" class="method-signature"
-            onclick="popupCode('Document.src/M000022.html');return false;">
+          <a href="Document.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000011.html');return false;">
 
           <span class="method-name">entropy</span><span class="method-args">(s)</span>
 
@@ -229,20 +231,21 @@ If the string parameter is composed of many words (i.e. tokens separated by
 whitespace(s)), it is considered as an ngram.
 </p>
 <pre>
-  entropy(&quot;guitar&quot;) #=&gt; 0.00389919463243839
+  entropy(&quot;guitar&quot;) #=&gt; 0.00432114812727959
+  entropy(&quot;dillinger escape plan&quot;) #=&gt; 0.265862076325102
 </pre>
 
         </div>
       </div>
 
 
-      <div id="method-M000020" class="method-detail">
-        <a name="M000020"></a>
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
 
         <div class="method-heading">
 
-          <a href="Document.src/M000020.html" target="Code" class="method-signature"
-            onclick="popupCode('Document.src/M000020.html');return false;">
+          <a href="Document.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000009.html');return false;">
 
           <span class="method-name">ngrams</span><span class="method-args">(n)</span>
 
@@ -264,16 +267,43 @@ Returns an Array containing the <tt>n</tt>-grams (words) from the current
       </div>
 
 
-      <h3 class="section-bar">Protected Instance methods</h3>
-
-
-      <div id="method-M000019" class="method-detail">
-        <a name="M000019"></a>
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
 
         <div class="method-heading">
 
-          <a href="Document.src/M000019.html" target="Code" class="method-signature"
-            onclick="popupCode('Document.src/M000019.html');return false;">
+          <a href="Document.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000012.html');return false;">
+
+          <span class="method-name">tf</span><span class="method-args">(s)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Computes the term frequency of a given <b>word</b> <tt>s</tt>.
+</p>
+<pre>
+  tf(&quot;guitar&quot;) #=&gt; 0.000380372765310004
+</pre>
+
+        </div>
+      </div>
+
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+
+          <a href="Document.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000008.html');return false;">
 
           <span class="method-name">format_words</span><span class="method-args">()</span>
 

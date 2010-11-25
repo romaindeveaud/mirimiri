@@ -2,14 +2,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>extract_xmltags_values (String)</title>
+  <title>strip_punctuation (String)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 161</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extract_xmltags_values</span>(<span class="ruby-identifier">tag_name</span>)
-    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-node">/&lt;#{tag_name}.*?&gt;(.+?)&lt;\/#{tag_name}&gt;/</span>).<span class="ruby-identifier">flatten</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/string.rb, line 153</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_punctuation</span>
+    <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">strip_punctuation!</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

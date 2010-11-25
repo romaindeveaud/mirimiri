@@ -2,23 +2,22 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>entropy (RIR::Document)</title>
+  <title>format_words (RIR::Document)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 77</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">entropy</span>(<span class="ruby-identifier">s</span>)
-      <span class="ruby-identifier">en</span> = <span class="ruby-value">0</span><span class="ruby-value">.0</span>
-      <span class="ruby-identifier">counts</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">count_words</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 31</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_words</span>
+      <span class="ruby-identifier">wo</span> = []
 
-      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">p_wi</span> = <span class="ruby-identifier">counts</span>[<span class="ruby-identifier">w</span>].<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-ivar">@words</span>.<span class="ruby-identifier">count</span>.<span class="ruby-identifier">to_f</span>
-        <span class="ruby-identifier">en</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">p_wi</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span>.<span class="ruby-identifier">log2</span>(<span class="ruby-identifier">p_wi</span>)
+      <span class="ruby-ivar">@doc_content</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\W/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sw</span><span class="ruby-operator">|</span> 
+          <span class="ruby-identifier">wo</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">sw</span>.<span class="ruby-identifier">downcase</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sw</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/[a-zA-Z]/</span> 
+        <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">end</span>
-
-      <span class="ruby-identifier">en</span> <span class="ruby-operator">*=</span> <span class="ruby-value">-1</span>
-      <span class="ruby-identifier">en</span>
+      
+      <span class="ruby-identifier">wo</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

@@ -2,15 +2,25 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>new (RIR::Document)</title>
+  <title>ngrams (RIR::Document)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 92</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">content</span>)
-      <span class="ruby-ivar">@doc_content</span> = <span class="ruby-identifier">content</span>
-      <span class="ruby-ivar">@words</span> = <span class="ruby-identifier">format_words</span>
+  <pre><span class="ruby-comment cmt"># File lib/rir/document.rb, line 46</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ngrams</span>(<span class="ruby-identifier">n</span>)
+      <span class="ruby-identifier">window</span>       = []
+      <span class="ruby-identifier">ngrams_array</span> = []
+
+      <span class="ruby-ivar">@words</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">window</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">w</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">window</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">n</span>
+          <span class="ruby-identifier">ngrams_array</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">window</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+          <span class="ruby-identifier">window</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-value">0</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">ngrams_array</span>.<span class="ruby-identifier">uniq</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

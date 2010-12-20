@@ -1,4 +1,4 @@
-# Ruby Information Retrieval (rIR)
+# mirimiri
 
 Copyright (C) 2010-2011 Romain Deveaud <romain.deveaud@gmail.com>
 

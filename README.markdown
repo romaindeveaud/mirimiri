@@ -2,6 +2,15 @@
 
 Copyright (C) 2010-2011 Romain Deveaud <romain.deveaud@gmail.com>
 
+> The Fijian monkey-faced bat (Mirimiri acrodonta), also called the Fiji 
+> Flying Fox, is an Old World fruit bat endemic to Fiji. It was discovered 
+> the hills of Taveuni by Bill Beckon in 1977 and is Fiji's only endemic 
+> mammal. It is listed as a critically endangered species due to habitat 
+> loss. It has recently been transferred from Pteralopex to its own 
+> monotypic genus Mirimiri.
+>
+> #####Wikipedia
+
 License
 =======
 

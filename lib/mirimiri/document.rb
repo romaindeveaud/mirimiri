@@ -99,7 +99,7 @@ module Mirimiri
     end
 
 
-    def initialize(content)
+    def initialize(content="")
       @doc_content = content
       @words = format_words
     end

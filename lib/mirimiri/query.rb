@@ -27,7 +27,7 @@ module Indri
   class Parameters
     attr_accessor :index_path, :memory, :count, :offset, :run_id, :print_query, :print_docs, :rule, :baseline
 
-    def initialize(corpus,mem="1g",count="1000",offset="1",run_id="default",print_query=false,print_docs=false)
+    def initialize(corpus,count="1000",mem="1g",offset="1",run_id="default",print_query=false,print_docs=false)
       @index_path  = corpus
       @memory      = mem
       @count       = count
@@ -38,8 +38,7 @@ module Indri
     end
 
     def to_s
-      h = "<parameters>\n"
-      h += "<memory>#{@memory}</memory>\n"
+      h = "<memory>#{@memory}</memory>\n"
       h += "<index>#{@index_path}</index>\n"
       h += "<count>#{@count}</count>\n"
       unless @baseline.nil?
@@ -47,6 +46,7 @@ module Indri
       else
         h += "<rule>#{@rule}</rule>\n"
       end
+      h += "<trecFormat>true</trecFormat>\n"
       h += "<queryOffset>#{@offset}</queryOffset>\n"
       h += "<runID>#{@run_id}</runID>\n"
       h += "<printQuery>#{@print_query}</printQuery>\n"
@@ -55,27 +55,42 @@ module Indri
       h
     end
   end
-  
+
   class IndriQuery < Query
-    attr_accessor :id, :query, :params, :rule
+    attr_accessor :id, :query, :rule
 
-    def initialize(id,query,params)
-      @params = params
-      # Here we set the default retrieval model as Language Modeling
-      # with a Dirichlet smoothing at 2500.
-      # TODO: maybe a Rule class...
-      @params.rule  = 'method:dirichlet,mu:2500' if @params.rule.nil?
-
+    def initialize(id,query)
       @id     = id
       @query  = query
     end
 
     def to_s
-      h = @params.to_s
-      h += "<query>\n"
+      h = "<query>\n"
       h += "<number>#{@id}</number>\n"
       h += "<text>#{@query}</text>\n"
       h += "</query>\n"
+
+      h
+    end
+  end
+
+  class IndriQueries
+    attr_accessor :params, :queries
+
+    def initialize(params,*queries)
+      @queries = queries    
+
+      @params = params
+      # Here we set the default retrieval model as Language Modeling
+      # with a Dirichlet smoothing at 2500.
+      # TODO: maybe a Rule class...
+      @params.rule  = 'method:dirichlet,mu:2500' if @params.rule.nil?
+    end
+
+    def to_s
+      h = "<parameters>\n"
+      h += @params.to_s
+      h += @queries.collect { |q| q.to_s }.join ""
       h += "</parameters>"
 
       h

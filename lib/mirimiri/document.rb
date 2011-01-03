@@ -80,11 +80,9 @@ module Mirimiri
     #   entropy("dillinger escape plan") #=> 0.265862076325102
     def entropy(s)
       en = 0.0
-      # TODO: count_words as an attribute?
-      counts = self.count_words
 
       s.split.each do |w|
-        p_wi = counts[w].to_f/@words.count.to_f
+        p_wi = @count_words[w].to_f/@words.count.to_f
         en += p_wi*Math.log2(p_wi)
       end
 
@@ -96,16 +94,17 @@ module Mirimiri
     #
     #   tf("guitar") #=> 0.000380372765310004
     def tf(s)
-      self.count_words[s].to_f/@words.size.to_f
+      @count_words[s].to_f/@words.size.to_f
     end
 
 
     def initialize(content="")
       @doc_content = content
       @words = format_words
+      @count_words = count_words
     end
 
-    protected :format_words
+    protected :format_words, :count_words
   end
 
   # A WebDocument is a Document with a +url+.

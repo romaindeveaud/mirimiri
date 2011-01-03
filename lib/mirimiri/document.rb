@@ -80,6 +80,7 @@ module Mirimiri
     #   entropy("dillinger escape plan") #=> 0.265862076325102
     def entropy(s)
       en = 0.0
+      # TODO: count_words as an attribute?
       counts = self.count_words
 
       s.split.each do |w|
@@ -119,9 +120,10 @@ module Mirimiri
 
     # WebDocument constructor, the content of the Document is the HTML page
     # without the tags.
-    def initialize(url)
+    def initialize(url,only_tags=nil)
       @url = url
-      super WebDocument.get_content(url).strip_javascripts.strip_stylesheets.strip_xml_tags
+      content = only_tags.nil? ? WebDocument.get_content(url) : WebDocument.get_content(url).extract_xmltags_values(only_tags).join("")
+      super content.strip_javascripts.strip_stylesheets.strip_xml_tags
     end
   end
 
@@ -154,10 +156,5 @@ module Mirimiri
       WikipediaPage.new(WikipediaPage.get_url title[0]) unless title.nil? || title.empty?
     end
 
-#    def initialize(name)
-#      title = WikipediaPage.search_wikipedia_titles name
-#      raise ArgumentError, "No page found" if title.empty? 
-#      super WikipediaPage.get_url title[0]
-#    end
   end
 end

@@ -25,7 +25,7 @@ module Mirimiri
 
   # A Document is a bag of words and is constructed from a string.
   class Document
-    attr_reader :words, :doc_content
+    attr_reader :words, :doc_content, :count_words
 
     # Any non-word characters are removed from the words (see http://perldoc.perl.org/perlre.html
     # and the \\W special escape).

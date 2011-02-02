@@ -122,7 +122,7 @@ module Mirimiri
     def initialize(url,only_tags=nil)
       @url = url
       content = only_tags.nil? ? WebDocument.get_content(url) : WebDocument.get_content(url).extract_xmltags_values(only_tags).join("")
-      super content.strip_javascripts.strip_stylesheets.strip_xml_tags
+      super content.strip_javascripts.strip_xml_tags
     end
   end
 
@@ -136,15 +136,15 @@ module Mirimiri
     def self.search_wikipedia_titles(name)
       raise ArgumentError, "Bad encoding", name unless name.isutf8
 
-      res = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml" ).toutf8).elements['api/query/search']
+      res = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml" ).unaccent.toutf8).elements['api/query/search']
 
-      res.collect { |e| e.attributes['title'] } unless res.nil?
+     res.collect { |e| e.attributes['title'] } unless res.nil?
     end
 
     def self.get_url(name)
       raise ArgumentError, "Bad encoding", name unless name.isutf8
 
-      atts = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml" ).toutf8).elements['api/query/pages/page'].attributes
+      atts = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml" ).unaccent.toutf8).elements['api/query/pages/page'].attributes
 
       atts['fullurl'] if atts['missing'].nil?
     end
@@ -152,7 +152,7 @@ module Mirimiri
     def self.search_homepage(name)
       title = WikipediaPage.search_wikipedia_titles name
 
-      WikipediaPage.new(WikipediaPage.get_url title[0]) unless title.nil? || title.empty?
+      WikipediaPage.get_url(title[0]) unless title.nil? || title.empty?
     end
 
   end

@@ -72,6 +72,10 @@ module Indri
 
       h
     end
+
+    def exec params
+      `IndriRunQuery -query='#{@query}' -index=#{params.index_path} -count=#{params.count} -rule=method:dirichlet,mu:2500 -trecFormat`
+    end
   end
 
   class IndriQueries

@@ -142,7 +142,7 @@ module Mirimiri
     end
 
     def self.get_url(name)
-      raise ArgumentError, "Bad encoding", name unless name.isutf9
+      raise ArgumentError, "Bad encoding", name unless name.isutf8
 
       atts = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&titles=#{URI.escape name}&inprop=url&prop=info&format=xml" ).unaccent.toutf8).elements['api/query/pages/page'].attributes
 

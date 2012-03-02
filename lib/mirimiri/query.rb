@@ -27,10 +27,11 @@ module Indri
   class Parameters
     attr_accessor :index_path, :memory, :count, :offset, :run_id, :print_query, :print_docs, :rule, :baseline
 
-    def initialize(corpus,count="1000",mem="1g",offset="1",run_id="default",print_query=false,print_docs=false)
+    def initialize(corpus,count="1000",mem="1g",threads="1",offset="1",run_id="default",print_query=false,print_docs=false)
       @index_path  = corpus
       @memory      = mem
       @count       = count
+      @threads     = threads
       @offset      = offset
       @run_id      = run_id
       @print_query = print_query ? "true" : "false"
@@ -41,6 +42,7 @@ module Indri
       h = "<memory>#{@memory}</memory>\n"
       h += "<index>#{@index_path}</index>\n"
       h += "<count>#{@count}</count>\n"
+      h += "<threads>#{@threads}</threads>\n"
       unless @baseline.nil?
         h += "<baseline>#{@baseline}</baseline>\n" 
       else
@@ -56,7 +58,7 @@ module Indri
     end
   end
 
-  class IndriQuery < Query
+  class IndriQueryOld < Query
     attr_accessor :id, :query, :rule
 
     def initialize(id,query)
@@ -75,6 +77,20 @@ module Indri
 
     def exec params
       `IndriRunQuery -query='#{@query}' -index=#{params.index_path} -count=#{params.count} -rule=method:dirichlet,mu:2500 -trecFormat`
+    end
+  end
+
+  class IndriQuery < Query
+    attr_accessor :query, :count, :sm_method, :sm_param, :sm_value, :args
+
+    def initialize atts={},args=nil
+      raise ArgumentError, 'Argument 1 must be a Hash' unless args.is_a? Hash
+      atts.each do |k,v|
+        instance_variable_set("@#{k}", v) unless v.nil?
+      end
+
+      raise ArgumentError, 'Argument 2 must be a String' unless args.is_a? String
+      @args = args 
     end
   end
 

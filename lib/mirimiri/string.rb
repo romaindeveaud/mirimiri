@@ -67,7 +67,7 @@ module Mirimiri
 "whoever","whole","whom","whomever","whomsoever","whose","whosoever","why","will",
 "wilt","with","within","without","worse","worst","would","wow","ye","yet","year",
 "yippee","you","your","yours","yourself","yourselves",
-  "edit", "new", "page", "article", "http", "www", "com", "org", "wikipedia", "en"
+  "edit", "new", "page", "article", "http", "www", "com", "org", "wikipedia", "en","html"
   ]
 
   Transmap = { 

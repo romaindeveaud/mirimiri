@@ -117,12 +117,15 @@ module Mirimiri
       Net::HTTP.get(URI.parse(url))
     end
 
+
     # WebDocument constructor, the content of the Document is the HTML page
     # without the tags.
     def initialize(url,only_tags=nil)
+      require 'sanitize'
+
       @url = url
       content = only_tags.nil? ? WebDocument.get_content(url) : WebDocument.get_content(url).extract_xmltags_values(only_tags).join("")
-      super content.strip_javascripts.strip_xml_tags
+      super Sanitize.clean(content.unaccent.toutf8.force_encoding("UTF-8"), :remove_contents => ['script'])
     end
   end
 
@@ -155,5 +158,24 @@ module Mirimiri
       WikipediaPage.get_url(title[0]) unless title.nil? || title.empty?
     end
 
+    def self.extract_anchors(url)
+      self.get_content(url).extract_xmltags_values('p').join(' ').scan(/<a href="(.+?)" title=.*?>(.+?)<\/a>/).delete_if { |a| a[0] =~ /^\/wiki\/.*$/.negated }
+    end
+  end
+
+  class FreebasePage < WebDocument
+    require 'net/http'
+    require 'kconv'
+    require 'json'
+
+    def self.search_article_ids query,limit
+      raise ArgumentError, "Bad encoding", name unless name.isutf8
+
+      JSON.parse(Net::HTTP.get( URI.parse "http://api.freebase.com/api/service/search?query=#{query.gsub(" ","+")}&limit=#{limit}" ))['result'].collect { |a| a['article']['id'] unless a['article'].nil? }.compact
+    end
+
+    def self.get_url id
+      "http://api.freebase.com/api/trans/raw#{id}"
+    end
   end
 end

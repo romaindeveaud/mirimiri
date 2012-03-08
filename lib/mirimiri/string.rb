@@ -161,9 +161,33 @@ class String
     Transmap.inject(self.force_encoding("ASCII-8BIT")) { |str, (utf8, asc)| str.gsub(utf8, asc) }
   end
 
-  # Returns +true+ if +self+ belongs to Rir::Stoplist, +false+ otherwise.
+  # Returns +true+ if +self+ belongs to Mirimiri::Stoplist, +false+ otherwise.
   def is_stopword?
     Stoplist.include?(self.downcase)
+  end
+
+  def sequential_dependence_model t=0.85,o=0.10,u=0.05,field=nil
+    d = Mirimiri::Document.new self
+
+    if field.nil?
+      ematch = d.ngrams(2).collect { |ng| "#1(#{ng})" }
+      pmatch = d.ngrams(2).collect { |ng| "#uw8(#{ng})" }
+    else
+      ematch = d.ngrams(2).collect { |ng| "#1(#{ng}).(#{field})" }
+      pmatch = d.ngrams(2).collect { |ng| "#uw8(#{ng}).(#{field})" }
+    end
+
+    if ematch.empty?
+      if field.nil?
+        ematch = d.words.collect { |ng| "#1(#{ng})" }
+        pmatch = d.words.collect { |ng| "#uw8(#{ng})" }
+      else
+        ematch = d.words.collect { |ng| "#1(#{ng}).(#{field})" }
+        pmatch = d.words.collect { |ng| "#uw8(#{ng}).(#{field})" }
+      end
+    end
+
+    "#weight ( #{t} #combine( #{self} ) #{o} #combine ( #{ematch.join(" ")} ) #{u} #combine ( #{pmatch.join(" ")} ) )"
   end
 
   # Do not use.
@@ -258,4 +282,13 @@ class String
   end
 
   private :strip_with_pattern
+end
+
+module Indri
+  class IndriPrintedDocuments < String
+
+    def extract_docs
+      self.split(/\d+ Q0 .+ \d+ -\d+.\d+ .+/).delete_if{ |x| x.empty? }  
+    end
+  end
 end

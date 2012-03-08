@@ -58,7 +58,7 @@ module Mirimiri
         end
       end
 
-      ngrams_array.uniq
+      ngrams_array
     end
 
     # Returns a Hash containing the words and their associated counts in the current Document.
@@ -71,19 +71,39 @@ module Mirimiri
       counts
     end
 
-    # Computes the entropy of a given string +s+ inside the document.
-    #
-    # If the string parameter is composed of many words (i.e. tokens separated
-    # by whitespace(s)), it is considered as an ngram.    
-    #
-    #   entropy("guitar") #=> 0.00432114812727959
-    #   entropy("dillinger escape plan") #=> 0.265862076325102
-    def entropy(s)
+    # Old entropy function.
+    # TODO: remove.
+    def entropy0(s)
       en = 0.0
 
       s.split.each do |w|
         p_wi = @count_words[w].to_f/@words.count.to_f
         en += p_wi*Math.log2(p_wi)
+      end
+
+      en *= -1
+      en
+    end
+
+    # Computes the entropy of a given string +s+ inside the document.
+    #
+    # If the string parameter is composed of many words (i.e. tokens separated
+    # by whitespace(s)), it is considered as an ngram.    
+    #
+    #   entropy("guitar") #=> 0.014348983965324762
+    #   entropy("dillinger escape plan") #=> 0.054976093116768154
+    def entropy(s)
+      en = 0.0
+      
+      size = s.split.size
+      
+      if size == 1
+        p_wi = @count_words[s].to_f/@words.count.to_f
+        en += p_wi*Math.log(p_wi)
+      elsif size > 1
+        ng_size = ngrams(size)
+        p_wi = ng_size.count(s).to_f/ng_size.count.to_f
+        en += p_wi*Math.log(p_wi)
       end
 
       en *= -1

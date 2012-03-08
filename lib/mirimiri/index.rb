@@ -24,16 +24,25 @@ end
 
 module Indri
 
-  class IndriIndex
+  class IndriIndex < Index
 
-    def exec indriquery
+    def initialize path
+      raise ArgumentError, 'Index path does not exist' unless File.directory? path
+      @path = path
+    end
+
+    def runquery indriquery
       raise ArgumentError, 'Argument is not an IndriQuery' unless indriquery.is_a? Indri::IndriQuery
   
-      query = "IndriRunQuery -query#{indriquery.query} -index=#{@path}"
+      query = "IndriRunQuery -query=\"#{indriquery.query}\" -index=#{@path}"
 
       query += " -count=#{indriquery.count}" unless indriquery.count.nil?
       query += " -rule=method:#{indriquery.sm_method},#{indriquery.sm_param}:#{indriquery.sm_value}" unless indriquery.sm_method.nil?
       query += " #{indriquery.args}" unless indriquery.args.nil?
+
+      res = `#{query}`
+
+      res
     end
   end
 end

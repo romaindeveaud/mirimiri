@@ -84,12 +84,12 @@ module Indri
     attr_accessor :query, :count, :sm_method, :sm_param, :sm_value, :args
 
     def initialize atts={},args=nil
-      raise ArgumentError, 'Argument 1 must be a Hash' unless args.is_a? Hash
+      raise ArgumentError, 'Argument 1 must be a Hash' unless atts.is_a? Hash
       atts.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end
 
-      raise ArgumentError, 'Argument 2 must be a String' unless args.is_a? String
+      raise ArgumentError, 'Argument 2 must be a String' unless (args.is_a?(String) || args.nil?)
       @args = args 
     end
   end
@@ -97,20 +97,31 @@ module Indri
   class IndriQueries
     attr_accessor :params, :queries
 
-    def initialize(params,*queries)
-      @queries = queries    
+    def initialize params
+#      @queries = queries    
 
       @params = params
+      @queries = {}
       # Here we set the default retrieval model as Language Modeling
       # with a Dirichlet smoothing at 2500.
       # TODO: maybe a Rule class...
       @params.rule  = 'method:dirichlet,mu:2500' if @params.rule.nil?
     end
 
+    def push id,query
+      @queries[id.to_i] = query
+    end
+
     def to_s
       h = "<parameters>\n"
       h += @params.to_s
-      h += @queries.collect { |q| q.to_s }.join ""
+      h += @queries.sort { |a,b| a[0] <=> b[0] }.collect do |q|
+            "<query>\n" +
+            "<number>#{q[0]}</number>\n" +
+            "<text>#{q[1]}</text>\n" +
+            "</query>\n"
+      end.join "" 
+#      h += @queries.collect { |q| q.to_s }.join ""
       h += "</parameters>"
 
       h

@@ -163,7 +163,7 @@ class String
 
   # Returns +true+ if +self+ belongs to Mirimiri::Stoplist, +false+ otherwise.
   def is_stopword?
-    Stoplist.include?(self.downcase)
+    self.split.all? { |e| Stoplist.include?(e.downcase) }
   end
 
   def sequential_dependence_model t=0.85,o=0.10,u=0.05,field=nil
@@ -187,7 +187,7 @@ class String
       end
     end
 
-    "#weight ( #{t} #combine( #{self} ) #{o} #combine ( #{ematch.join(" ")} ) #{u} #combine ( #{pmatch.join(" ")} ) )"
+    "#weight ( #{t} #combine( #{d.words.join(" ")} ) #{o} #combine ( #{ematch.join(" ")} ) #{u} #combine ( #{pmatch.join(" ")} ) )"
   end
 
   # Do not use.

@@ -50,15 +50,18 @@ module Mirimiri
       window       = []
       ngrams_array = []
 
-      @words.each do |w|
-        window.push(w)
-        if window.size == n
-          ngrams_array.push window.join(" ")
-          window.delete_at(0)
+      if @ngrams[n].nil?
+        @words.each do |w|
+          window.push(w)
+          if window.size == n
+            ngrams_array.push window.join(" ")
+            window.delete_at(0)
+          end
         end
+        @ngrams[n] = ngrams_array
       end
 
-      ngrams_array
+      @ngrams[n]
     end
 
     # Returns a Hash containing the words and their associated counts in the current Document.
@@ -122,6 +125,7 @@ module Mirimiri
       @doc_content = content
       @words = format_words
       @count_words = count_words
+      @ngrams = {}
     end
 
     protected :format_words, :count_words

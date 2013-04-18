@@ -67,7 +67,8 @@ module Mirimiri
 "whoever","whole","whom","whomever","whomsoever","whose","whosoever","why","will",
 "wilt","with","within","without","worse","worst","would","wow","ye","yet","year",
 "yippee","you","your","yours","yourself","yourselves",
-  "edit", "new", "page", "article", "http", "www", "com", "org", "wikipedia", "en","html"
+  "edit", "new", "page", "article", "http", "www", "com", "org", "wikipedia", "en","html",
+  "amp","nbsp","quot"
   ]
 
   Transmap = { 
@@ -158,6 +159,7 @@ class String
 
   def unaccent
     # force_encoding is needed with ruby1.9
+#    Transmap.inject(self) { |str, (utf8, asc)| str.gsub(utf8, asc) }
     Transmap.inject(self.force_encoding("ASCII-8BIT")) { |str, (utf8, asc)| str.gsub(utf8, asc) }
   end
 
@@ -166,7 +168,15 @@ class String
     self.split.all? { |e| Stoplist.include?(e.downcase) }
   end
 
-  def sequential_dependence_model t=0.85,o=0.10,u=0.05,field=nil
+  def is_integer?
+    !self.empty? && self =~ /\A\d+\Z/ 
+  end
+
+  def numeric?
+    Float(self) != nil rescue false
+  end
+
+  def sequential_dependence_model field=nil,t=0.85,o=0.10,u=0.05
     d = Mirimiri::Document.new self
 
     if field.nil?
@@ -288,7 +298,13 @@ module Indri
   class IndriPrintedDocuments < String
 
     def extract_docs
-      self.split(/\d+ Q0 .+ \d+ -\d+.\d+ .+/).delete_if{ |x| x.empty? }  
+      self.split(/\d+ Q0 .+ \d+ -\d+.\d+ .+/).delete_if{ |x| x.empty? } 
+    end
+
+    def extract_docs_score
+      score = self.scan(/\d+ Q0 .+ \d+ (-\d+.\d+) .+/).flatten
+      name  = self.scan(/\d+ Q0 (.+) \d+ -\d+.\d+ .+/).collect { |n| n.first.scan(/(\d+).xml/).first }
+      return self.split(/\d+ Q0 .+ \d+ -\d+.\d+ .+/).delete_if{ |x| x.empty? },score,name 
     end
   end
 end

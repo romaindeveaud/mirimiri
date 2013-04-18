@@ -1,6 +1,12 @@
 # mirimiri
 
-Copyright (C) 2010-2011 Romain Deveaud <romain.deveaud@gmail.com>
+The various tools of this project were developed for research purposes during 
+my Ph.D. and heavily rely on the use of Indri (<http://lemurproject.org/indri.php>).
+Setting up Ruby is not as painful as it used to be since RVM (<https://rvm.io/>), 
+visit at least these two websites before trying to use `mirimiri`.
+
+
+Copyright (C) 2010-2013 Romain Deveaud <romain.deveaud@gmail.com>
 
 > The Fijian monkey-faced bat (Mirimiri acrodonta), also called the Fiji 
 > Flying Fox, is an Old World fruit bat endemic to Fiji. It was discovered 

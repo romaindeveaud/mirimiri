@@ -20,6 +20,9 @@
 #++
 
 class Query
+  attr_accessor :query
+
+
 end
 
 module Indri
@@ -27,7 +30,7 @@ module Indri
   class Parameters
     attr_accessor :index_path, :memory, :count, :offset, :run_id, :print_query, :print_docs, :rule, :baseline
 
-    def initialize(corpus,count="1000",mem="1g",threads="1",offset="1",run_id="default",print_query=false,print_docs=false)
+    def initialize(corpus,count="1000",mem="1g",threads="1",offset="1",run_id="default",print_passages=false,print_query=false,print_docs=false)
       @index_path  = corpus
       @memory      = mem
       @count       = count
@@ -36,11 +39,15 @@ module Indri
       @run_id      = run_id
       @print_query = print_query ? "true" : "false"
       @print_docs  = print_docs  ? "true" : "false"
+      @print_passages  = print_passages  ? "true" : "false"
+      @indexes     = [corpus]
     end
 
     def to_s
       h = "<memory>#{@memory}</memory>\n"
-      h += "<index>#{@index_path}</index>\n"
+      @indexes.each do |i|
+        h += "<index>#{i}</index>\n"
+      end
       h += "<count>#{@count}</count>\n"
       h += "<threads>#{@threads}</threads>\n"
       unless @baseline.nil?
@@ -51,10 +58,15 @@ module Indri
       h += "<trecFormat>true</trecFormat>\n"
       h += "<queryOffset>#{@offset}</queryOffset>\n"
       h += "<runID>#{@run_id}</runID>\n"
+      h += "<printPassages>#{@print_passages}</printPassages>\n"
       h += "<printQuery>#{@print_query}</printQuery>\n"
       h += "<printDocuments>#{@print_docs}</printDocuments>\n"
 
       h
+    end
+
+    def add_index path
+      @indexes << path
     end
   end
 
@@ -91,6 +103,10 @@ module Indri
 
       raise ArgumentError, 'Argument 2 must be a String' unless (args.is_a?(String) || args.nil?)
       @args = args 
+    end
+
+    def clarity index_path,terms=10,documents=5
+      `clarity -index=#{index_path} -documents=#{documents} -terms=#{terms} -smoothing=\"method:#{@sm_method},#{@sm_param}:#{@sm_value}\" -query=\"#{query}\"`.split("=").last.strip
     end
   end
 

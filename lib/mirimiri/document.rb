@@ -25,7 +25,7 @@ module Mirimiri
 
   # A Document is a bag of words and is constructed from a string.
   class Document
-    attr_reader :words, :doc_content, :count_words
+    attr_reader :words, :doc_content, :xcount
 
     # Any non-word characters are removed from the words (see http://perldoc.perl.org/perlre.html
     # and the \\W special escape).
@@ -36,7 +36,7 @@ module Mirimiri
 
       @doc_content.split.each do |w|
         w.split(/\W/).each do |sw| 
-          wo.push(sw.downcase) if sw =~ /[a-zA-Z]/ 
+          wo.push(sw.downcase) if sw =~ /[[:alpha:]]/ 
         end
       end
       
@@ -80,7 +80,7 @@ module Mirimiri
       en = 0.0
 
       s.split.each do |w|
-        p_wi = @count_words[w].to_f/@words.count.to_f
+        p_wi = @xcount[w].to_f/@words.count.to_f
         en += p_wi*Math.log2(p_wi)
       end
 
@@ -101,7 +101,7 @@ module Mirimiri
       size = s.split.size
       
       if size == 1
-        p_wi = @count_words[s].to_f/@words.count.to_f
+        p_wi = @xcount[s].to_f/@words.count.to_f
         en += p_wi*Math.log(p_wi)
       elsif size > 1
         ng_size = ngrams(size)
@@ -117,14 +117,28 @@ module Mirimiri
     #
     #   tf("guitar") #=> 0.000380372765310004
     def tf(s)
-      @count_words[s].to_f/@words.size.to_f
+      @xcount[s].to_f/@words.size.to_f
     end
 
+    # Computes the KL divergence between the language model of the +self+
+    # and the language model of +doc+. 
+    #
+    # KL is not symmetric, see http://en.wikipedia.org/wiki/Kullback-Leibler_divergence
+    # for more information.
+    #
+    #   d1.kl(d2) #=> 0.2971808085725761
+    def kl(doc)
+      raise ArgumentError, 'Argument is not a Mirimiri::Document' unless doc.is_a? Mirimiri::Document 
+     
+      vocab = self.words & doc.words
+
+      vocab.inject(0.0) { |res,w| res + self.tf(w)*Math.log(self.tf(w)/doc.tf(w)) }
+    end
 
     def initialize(content="")
       @doc_content = content
       @words = format_words
-      @count_words = count_words
+      @xcount = count_words
       @ngrams = {}
     end
 
@@ -149,7 +163,7 @@ module Mirimiri
 
       @url = url
       content = only_tags.nil? ? WebDocument.get_content(url) : WebDocument.get_content(url).extract_xmltags_values(only_tags).join("")
-      super Sanitize.clean(content.unaccent.toutf8.force_encoding("UTF-8"), :remove_contents => ['script'])
+      super Sanitize.clean(content, :remove_contents => ['script','style'])
     end
   end
 
@@ -161,9 +175,9 @@ module Mirimiri
 
 
     def self.search_wikipedia_titles(name)
-      raise ArgumentError, "Bad encoding", name unless name.isutf8
+#      raise ArgumentError, "Bad encoding", name unless name.isutf8
 
-      res = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&format=xml" ).unaccent.toutf8).elements['api/query/search']
+      res = REXML::Document.new(Net::HTTP.get( URI.parse "http://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=#{URI.escape name}&srlimit=20&format=xml" ).force_encoding("ISO-8859-1").encode("UTF-8")).elements['api/query/search']
 
      res.collect { |e| e.attributes['title'] } unless res.nil?
     end

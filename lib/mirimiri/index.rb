@@ -32,7 +32,7 @@ module Indri
     end
 
     def runquery indriquery
-      raise ArgumentError, 'Argument is not an IndriQuery' unless indriquery.is_a? Indri::IndriQuery
+      raise ArgumentError, 'Argument is not an Indri::IndriQuery' unless indriquery.is_a? Indri::IndriQuery
   
       query = "IndriRunQuery -query=\"#{indriquery.query}\" -index=#{@path}"
 
